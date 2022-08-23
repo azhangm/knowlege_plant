@@ -3,6 +3,7 @@ package com.dajuancai.knowledge_plant.mapper;
 import com.dajuancai.knowledge_plant.pojo.Ebook;
 import com.dajuancai.knowledge_plant.pojo.Test;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 @Mapper
@@ -19,5 +20,6 @@ public interface EbookMapper {
 
     int updateByPrimaryKey(Ebook record);
 
-    List<Ebook> selectAll();
+    List<Ebook> selectAll(String s);
+    List<Ebook>  selectList();
 }

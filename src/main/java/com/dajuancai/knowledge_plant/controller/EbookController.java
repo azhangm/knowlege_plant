@@ -1,8 +1,11 @@
 package com.dajuancai.knowledge_plant.controller;
 
+import com.dajuancai.knowledge_plant.req.EbookReq;
 import com.dajuancai.knowledge_plant.commen.ApiResponse;
 import com.dajuancai.knowledge_plant.pojo.Ebook;
+import com.dajuancai.knowledge_plant.resp.EbookResp;
 import com.dajuancai.knowledge_plant.service.EbookService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +23,13 @@ public class EbookController {
         return "hello world3";
     }
 
-    @RequestMapping("/list/")
-    public ApiResponse list() {
-        List<Ebook> list = ebookService.list();
-        ApiResponse<List<Ebook>> listApiResponse = new ApiResponse<>();
+    @GetMapping("/list/")
+    public ApiResponse list(EbookReq req) {
+        List<EbookResp> list = ebookService.list(req);
+        ApiResponse<List<EbookResp>> listApiResponse = new ApiResponse<>();
         listApiResponse.setData(list);
         return listApiResponse;
     }
+
+
 }
