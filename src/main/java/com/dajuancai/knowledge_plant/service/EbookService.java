@@ -4,6 +4,7 @@ import com.dajuancai.knowledge_plant.req.EbookReq;
 import com.dajuancai.knowledge_plant.mapper.EbookMapper;
 import com.dajuancai.knowledge_plant.pojo.Ebook;
 import com.dajuancai.knowledge_plant.resp.EbookResp;
+import com.dajuancai.knowledge_plant.utils.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +28,7 @@ public class EbookService {
          s = "%" + keyword + "%";
         ebooks = ebookMapper.selectAll(s);
         }
-        List<EbookResp> ebookResps = new ArrayList<>();
-        for (Ebook ebook : ebooks) {
-            EbookResp ebookResp = new EbookResp();
-            BeanUtils.copyProperties(ebook , ebookResp);
-            ebookResps.add(ebookResp);
-        }
+        List<EbookResp> ebookResps = CopyUtil.copyList(ebooks, EbookResp.class);
         return ebookResps;
     }
 }
