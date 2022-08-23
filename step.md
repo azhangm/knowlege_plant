@@ -17,4 +17,6 @@ DELETE 删除
 * 自定义配置项
 * 查找配置文件 搜到的是properties 可以使用
 * [转yaml格式](toyaml.com/index.html)
-*  toyaml.com/index.html
+* toyaml.com/index.html
+
+### 集成热部署
