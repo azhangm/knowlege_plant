@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/knowledge_plant?useUnicode=true&characterEncoding=UTF-8&userSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true
+    username: root
+    password: root
+
+#    ??mybatis ??? Mapper.xml ?????
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
