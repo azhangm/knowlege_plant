@@ -1,57 +1,3 @@
-### 修改banner
-[个性文字网址](http://patorjk.com/software/taag/)
-
-###  @RequestMapping 
-GET 查
-POST 增 
-PUT 修改 
-DELETE 删除
-都有对应Mapping
-
-支持所有请求方式
-
-### 405 返回码 
-不支持请求格式的返回码
-
-### spring boot 配置文件
-* 自定义配置项
-* 查找配置文件 搜到的是properties 可以使用
-* [转yaml格式](toyaml.com/index.html)
-* toyaml.com/index.html
-
-### 集成热部署
-
-
-### 集成持久层框架 Mybatis
-
-
-### spring 拦截器 记录接口耗时
- #### 配置 mvc config
-```java
-package com.dajuancai.knowledge_plant.config;
-
-import com.dajuancai.knowledge_plant.interceptor.LogInterceptor;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import javax.annotation.Resource;
-
-@Configuration
-public class SpringMvcConfig implements WebMvcConfigurer {
-
-    @Resource
-    LogInterceptor logInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-//        注册拦截器 拦截所有请求 忽略登录接口的拦截
-        registry.addInterceptor(logInterceptor).addPathPatterns("/**").excludePathPatterns("/login/");
-    }
-}
-```
-#### 耗时 拦截器的实现
-```java
 package com.dajuancai.knowledge_plant.interceptor;
 
 import org.slf4j.Logger;
@@ -90,4 +36,3 @@ import org.slf4j.Logger;
          LOG.info("------------- LogInterceptor 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
      }
  }
-```
