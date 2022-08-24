@@ -4,7 +4,10 @@ import com.dajuancai.knowledge_plant.req.EbookReq;
 import com.dajuancai.knowledge_plant.mapper.EbookMapper;
 import com.dajuancai.knowledge_plant.pojo.Ebook;
 import com.dajuancai.knowledge_plant.resp.EbookResp;
+import com.dajuancai.knowledge_plant.resp.PageResp;
 import com.dajuancai.knowledge_plant.utils.CopyUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,8 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public List<EbookResp> list(EbookReq req) {
+    public PageResp<EbookResp> list(EbookReq req) {
+        PageHelper.startPage(req.getPage(), req.getSize());
         String s ;
         String keyword = req.getKeyword();
         List<Ebook> ebooks;
@@ -28,7 +32,12 @@ public class EbookService {
          s = "%" + keyword + "%";
         ebooks = ebookMapper.selectAll(s);
         }
+        PageResp<EbookResp>  pageResp = new PageResp<>();
         List<EbookResp> ebookResps = CopyUtil.copyList(ebooks, EbookResp.class);
-        return ebookResps;
+        PageInfo pageInfo = new PageInfo(ebookResps);
+        pageResp.setTotal(pageInfo.getTotal());
+        pageResp.setList(ebookResps);
+        return pageResp;
+
     }
 }
