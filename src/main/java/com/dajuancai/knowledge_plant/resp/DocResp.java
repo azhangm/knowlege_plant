@@ -1,10 +1,9 @@
-package com.dajuancai.knowledge_plant.req;
+package com.dajuancai.knowledge_plant.resp;
 
 import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 /**
  * category
@@ -12,7 +11,16 @@ import java.io.Serializable;
  */
 @Table(name="category")
 @Data
-public class CategoryQueryReq  extends PageReq {
+public class DocResp {
+    /**
+     * id
+     */
+    private Long id;
+
+    /**
+     * 电子书id
+     */
+    private Long ebookId;
 
     /**
      * 父id
@@ -29,5 +37,13 @@ public class CategoryQueryReq  extends PageReq {
      */
     private Integer sort;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 阅读数
+     */
+    private Integer viewCount;
+
+    /**
+     * 点赞数
+     */
+    private Integer voteCount;
 }
