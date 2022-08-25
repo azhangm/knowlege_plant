@@ -22,4 +22,6 @@ public interface EbookMapper {
 
     List<Ebook> selectAll(String s);
     List<Ebook>  selectList();
+
+    List<Ebook> selectByCategoryId(Long categoryId2);
 }

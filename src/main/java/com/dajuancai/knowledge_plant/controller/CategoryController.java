@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 @RestController
@@ -19,6 +20,7 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
+
     @RequestMapping("/hello/")
     public String hello() {
         return "hello world3";
@@ -32,14 +34,14 @@ public class CategoryController {
         return listApiResponse;
     }
 
-    @PutMapping("/update")
+        @PutMapping("/update/")
     public ApiResponse update(@Valid @RequestBody CategorySaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
         categoryService.update(req);
         return apiResponse;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/save/")
     public ApiResponse save  (@Valid @RequestBody CategorySaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
         categoryService.save(req);
@@ -53,5 +55,11 @@ public class CategoryController {
         return apiResponse;
     }
 
-
+    @GetMapping("/selectAll/")
+    public ApiResponse allList( ) {
+        ApiResponse objectApiResponse = new ApiResponse();
+        List<CategoryResp> categoryResps = categoryService.allList();
+        objectApiResponse.setData(categoryResps);
+        return objectApiResponse;
+    }
 }

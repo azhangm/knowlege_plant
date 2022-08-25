@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,15 +24,22 @@ public class EbookService {
         String s ;
         String keyword = req.getKeyword();
         List<Ebook> ebooks;
-        if (null == keyword || keyword.equals(" ") || keyword.length() == 0 ) {
+        if (ObjectUtils.isEmpty(req.getKeyword()) &&ObjectUtils.isEmpty(req.getCategoryId2())) {
             PageHelper.startPage(req.getPage(), req.getSize());
             ebooks = ebookMapper.selectList();
         }
-        else {
+        else  if (ObjectUtils.isEmpty(req.getCategoryId2()) && !ObjectUtils.isEmpty(req.getKeyword())){
          s = "%" + keyword + "%";
             PageHelper.startPage(req.getPage(), req.getSize());
             ebooks = ebookMapper.selectAll(s);
+        }else {
+            System.out.println("分类查询开始");
+            PageHelper.startPage(req.getPage(), req.getSize());
+            ebooks = ebookMapper.selectByCategoryId(req.getCategoryId2());
+            System.out.println(ebooks);
         }
+
+        System.out.println(ebooks);
         PageResp<EbookResp>  pageResp = new PageResp<>();
         PageInfo pageInfo = new PageInfo(ebooks);
         List<EbookResp> ebookResps = CopyUtil.copyList(ebooks, EbookResp.class);

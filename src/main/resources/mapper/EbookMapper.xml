@@ -38,8 +38,14 @@
     <include refid="Base_Column_List" />
     from ebook ebook
   </select>
+    <select id="selectByCategoryId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from ebook ebook
+      where ebook.category2_id = ${categoryId2,jdbcType=BIGINT}
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ebook
     where id = #{id,jdbcType=BIGINT}
   </delete>
