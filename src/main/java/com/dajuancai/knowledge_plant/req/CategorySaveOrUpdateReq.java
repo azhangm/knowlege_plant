@@ -23,6 +23,7 @@ public class CategorySaveOrUpdateReq   {
     /**
      * 父id
      */
+    @NotNull(message = "请填写父类id")
     private Long parent;
 
     /**
