@@ -36,9 +36,6 @@ public class EbookService {
         PageInfo pageInfo = new PageInfo(ebooks);
         List<EbookResp> ebookResps = CopyUtil.copyList(ebooks, EbookResp.class);
         pageResp.setTotal( pageInfo.getTotal());
-        System.out.println("数据数" + pageInfo.getTotal());
-        System.out.println(  "页数" + pageInfo.getPageNum());
-        System.out.println(pageInfo.getPages());
         pageResp.setList(ebookResps);
         return pageResp;
 

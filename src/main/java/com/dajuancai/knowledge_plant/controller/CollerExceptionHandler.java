@@ -3,7 +3,6 @@ package com.dajuancai.knowledge_plant.controller;
 
 import com.dajuancai.knowledge_plant.commen.ApiResponse;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

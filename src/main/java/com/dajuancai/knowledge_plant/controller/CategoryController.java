@@ -1,54 +1,55 @@
 package com.dajuancai.knowledge_plant.controller;
 
-import com.dajuancai.knowledge_plant.req.EbookQueryReq;
 import com.dajuancai.knowledge_plant.commen.ApiResponse;
-import com.dajuancai.knowledge_plant.req.EbookSaveOrUpdateReq;
-import com.dajuancai.knowledge_plant.resp.EbookResp;
+import com.dajuancai.knowledge_plant.req.CategoryQueryReq;
+import com.dajuancai.knowledge_plant.req.CategorySaveOrUpdateReq;
+import com.dajuancai.knowledge_plant.resp.CategoryResp;
 import com.dajuancai.knowledge_plant.resp.PageResp;
-import com.dajuancai.knowledge_plant.service.EbookService;
+import com.dajuancai.knowledge_plant.service.CategoryService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+
 @Validated
 @RestController
-@RequestMapping("/eBook")
-public class EbookController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Resource
-    private EbookService ebookService;
+    private CategoryService categoryService;
     @RequestMapping("/hello/")
     public String hello() {
         return "hello world3";
     }
 
     @GetMapping("/list/")
-    public ApiResponse list(@Valid  EbookQueryReq req) {
-        PageResp<EbookResp> list = ebookService.list(req);
-        ApiResponse<PageResp<EbookResp>> listApiResponse = new ApiResponse<>();
+    public ApiResponse list(@Valid CategoryQueryReq req) {
+        PageResp<CategoryResp> list = categoryService.list(req);
+        ApiResponse<PageResp<CategoryResp>> listApiResponse = new ApiResponse<>();
         listApiResponse.setData(list);
         return listApiResponse;
     }
 
     @PutMapping("/update")
-    public ApiResponse update(@Valid @RequestBody EbookSaveOrUpdateReq req) {
+    public ApiResponse update(@Valid @RequestBody CategorySaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
-        ebookService.update(req);
+        categoryService.update(req);
         return apiResponse;
     }
 
     @PostMapping("/save")
-    public ApiResponse save  (@Valid @RequestBody EbookSaveOrUpdateReq req) {
+    public ApiResponse save  (@Valid @RequestBody CategorySaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
-        ebookService.save(req);
+        categoryService.save(req);
         return apiResponse;
     }
 
     @DeleteMapping("/delete/{id}")
     public ApiResponse delete(@PathVariable Long id) {
         ApiResponse apiResponse = new ApiResponse();
-        ebookService.delet(id);
+        categoryService.delet(id);
         return apiResponse;
     }
 
