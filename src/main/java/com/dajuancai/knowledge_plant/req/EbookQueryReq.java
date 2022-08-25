@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EbookReq extends PageReq{
+public class EbookQueryReq extends PageReq{
     /*
     *
     * */
