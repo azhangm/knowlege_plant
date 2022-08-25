@@ -35,4 +35,18 @@ public class EbookController {
         ebookService.update(req);
         return apiResponse;
     }
+
+    @PostMapping("/save")
+    public ApiResponse save  (@RequestBody EbookSaveOrUpdateReq req) {
+        ApiResponse apiResponse = new ApiResponse();
+        ebookService.save(req);
+        return apiResponse;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse delete(@PathVariable Long id) {
+        ApiResponse apiResponse = new ApiResponse();
+        ebookService.delet(id);
+        return apiResponse;
+    }
 }

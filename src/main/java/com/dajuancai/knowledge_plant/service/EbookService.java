@@ -9,6 +9,7 @@ import com.dajuancai.knowledge_plant.resp.PageResp;
 import com.dajuancai.knowledge_plant.utils.CopyUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,5 +47,16 @@ public class EbookService {
     public void update(EbookSaveOrUpdateReq req) {
         Ebook ebook = CopyUtil.copy(req,Ebook.class);
         ebookMapper.updateByPrimaryKey(ebook);
+    }
+
+    public void save(EbookSaveOrUpdateReq req) {
+        Ebook ebook = new Ebook();
+        BeanUtils.copyProperties(req,ebook);
+        System.out.println(ebook);
+        ebookMapper.insert(ebook);
+    }
+
+    public void delet(Long id) {
+        ebookMapper.deleteByPrimaryKey(id);
     }
 }
