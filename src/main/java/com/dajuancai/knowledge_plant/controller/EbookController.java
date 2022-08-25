@@ -32,14 +32,14 @@ public class EbookController {
     }
 
     @PostMapping("/update")
-    public ApiResponse update(@RequestBody EbookSaveOrUpdateReq req) {
+    public ApiResponse update(@Valid @RequestBody EbookSaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
         ebookService.update(req);
         return apiResponse;
     }
 
     @PostMapping("/save")
-    public ApiResponse save  (@RequestBody EbookSaveOrUpdateReq req) {
+    public ApiResponse save  (@Valid @RequestBody EbookSaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
         ebookService.save(req);
         return apiResponse;

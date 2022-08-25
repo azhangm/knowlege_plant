@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class EbookSaveOrUpdateReq {
     /**
      * 名称
      */
+    @NotNull(message = "名称不能为空")
     private String name;
 
     /**
@@ -32,11 +35,13 @@ public class EbookSaveOrUpdateReq {
     /**
      * 描述
      */
+    @NotNull(message = "请添加描述")
     private String description;
 
     /**
      * 封面
      */
+    @NotNull(message = "请添加封面")
     private String cover;
 
     /**
