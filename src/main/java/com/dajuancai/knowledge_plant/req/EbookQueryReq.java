@@ -13,6 +13,7 @@ public class EbookQueryReq extends PageReq{
     /*
     *
     * */
+
     private Long id;
     /**
      * 名称

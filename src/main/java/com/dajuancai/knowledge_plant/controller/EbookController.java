@@ -6,10 +6,12 @@ import com.dajuancai.knowledge_plant.req.EbookSaveOrUpdateReq;
 import com.dajuancai.knowledge_plant.resp.EbookResp;
 import com.dajuancai.knowledge_plant.resp.PageResp;
 import com.dajuancai.knowledge_plant.service.EbookService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-
+import javax.validation.Valid;
+@Validated
 @RestController
 @RequestMapping("/eBook")
 public class EbookController {
@@ -22,7 +24,7 @@ public class EbookController {
     }
 
     @GetMapping("/list/")
-    public ApiResponse list(EbookQueryReq req) {
+    public ApiResponse list(@Valid  EbookQueryReq req) {
         PageResp<EbookResp> list = ebookService.list(req);
         ApiResponse<PageResp<EbookResp>> listApiResponse = new ApiResponse<>();
         listApiResponse.setData(list);

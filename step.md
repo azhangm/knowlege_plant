@@ -96,3 +96,7 @@ import org.slf4j.Logger;
 
 * 配置 AOP 
 * 以后学习
+
+
+### 集成 Validation 做参数校验
+* 计划曾 springboot  start validation
