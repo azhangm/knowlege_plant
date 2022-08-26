@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,8 +27,8 @@ public class DocService {
         example.setOrderByClause("sort asc");
         DocExample.Criteria criteria = example.createCriteria();
         PageHelper.startPage(req.getPage(), req.getSize());
-        List<Doc> categories = docMapper.selectByExample(example);
-        PageInfo pageInfo = new PageInfo(categories);
+        List<Doc> docs = docMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(docs);
         PageResp<DocResp> pageResp =  new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(pageInfo.getList());
@@ -35,19 +36,23 @@ public class DocService {
     }
 
     public void update(DocSaveOrUpdateReq req) {
-        Doc categor = CopyUtil.copy(req,Doc.class);
-        docMapper.updateByPrimaryKey(categor);
+        Doc doc = CopyUtil.copy(req,Doc.class);
+        docMapper.updateByPrimaryKey(doc);
     }
 
     public void save(DocSaveOrUpdateReq req) {
-        Doc categor = new Doc();
-        BeanUtils.copyProperties(req,categor);
-        System.out.println(categor);
-        docMapper.insert(categor);
+        Doc doc = new Doc();
+        BeanUtils.copyProperties(req,doc);
+        System.out.println(doc);
+        docMapper.insert(doc);
     }
 
-    public void delet(Long id) {
-        docMapper.deleteByPrimaryKey(id);
+    public void delet(String id) {
+        DocExample example = new DocExample();
+        DocExample.Criteria criteria = example.createCriteria();
+        List<String> strings = Arrays.asList(id.split(","));
+        criteria.andIdIn(strings);
+        docMapper.deleteByExample(example);
     }
 
     public List<DocResp> allList() {
@@ -58,5 +63,6 @@ public class DocService {
 
         return docResps;
     }
+
 
 }

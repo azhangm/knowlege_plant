@@ -48,10 +48,10 @@ public class DocController {
         return apiResponse;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ApiResponse delete(@PathVariable Long id) {
+    @DeleteMapping("/delete/{ids}")
+    public ApiResponse delete(@PathVariable String ids) {
         ApiResponse apiResponse = new ApiResponse();
-        docService.delet(id);
+        docService.delet(ids);
         return apiResponse;
     }
 

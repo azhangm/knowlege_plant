@@ -1,6 +1,7 @@
 package com.dajuancai.knowledge_plant.req;
 
 import lombok.Data;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class DocSaveOrUpdateReq {
     /**
      * 顺序
      */
-    @NotNull(message = "第几页不能为空")
+    @NotNull(message = "顺序不能为空")
     private Integer sort;
 
     /**
