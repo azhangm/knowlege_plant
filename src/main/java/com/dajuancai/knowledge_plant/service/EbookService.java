@@ -7,6 +7,7 @@ import com.dajuancai.knowledge_plant.req.EbookSaveOrUpdateReq;
 import com.dajuancai.knowledge_plant.resp.EbookResp;
 import com.dajuancai.knowledge_plant.resp.PageResp;
 import com.dajuancai.knowledge_plant.utils.CopyUtil;
+import com.dajuancai.knowledge_plant.utils.SnowFlake;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +21,8 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
+    @Resource
+    private SnowFlake snowFlake;
     public PageResp<EbookResp> list(EbookQueryReq req) {
         String s ;
         String keyword = req.getKeyword();
@@ -56,6 +59,8 @@ public class EbookService {
 
     public void save(EbookSaveOrUpdateReq req) {
         Ebook ebook = new Ebook();
+        long l = snowFlake.nextId();
+        req.setId(l);
         BeanUtils.copyProperties(req,ebook);
         System.out.println(ebook);
         ebookMapper.insert(ebook);
