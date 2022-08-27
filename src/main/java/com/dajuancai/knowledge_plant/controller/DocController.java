@@ -63,5 +63,11 @@ public class DocController {
         return objectApiResponse;
     }
 
-
+    @GetMapping("/findContent/{id}")
+    public ApiResponse<String> findContent(@PathVariable Long id) {
+        String content = docService.findContent(id);
+        ApiResponse<String> stringApiResponse = new ApiResponse<>();
+        stringApiResponse.setData(content);
+        return stringApiResponse;
+    }
 }
