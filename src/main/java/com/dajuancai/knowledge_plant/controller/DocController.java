@@ -33,8 +33,17 @@ public class DocController {
         listApiResponse.setData(list);
         return listApiResponse;
     }
+    @GetMapping("/all/{ebookId}")
+    public ApiResponse list(@PathVariable Long ebookId) {
+        List<DocResp> list = docService.allList(ebookId);
+        docService.allList(ebookId);
+        ApiResponse<List<DocResp>> listApiResponse = new ApiResponse<>();
+        listApiResponse.setData(list);
+        return listApiResponse;
+    }
 
-        @PutMapping("/update/")
+
+    @PutMapping("/update/")
     public ApiResponse update(@Valid @RequestBody DocSaveOrUpdateReq req) {
         ApiResponse apiResponse = new ApiResponse();
         docService.update(req);
